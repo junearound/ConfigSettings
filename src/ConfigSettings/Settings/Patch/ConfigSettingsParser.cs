@@ -502,7 +502,7 @@ namespace ConfigSettings.Patch
     private void ParseBlock(string settingsFilePath, XElement element)
     {
       var nameAttribute = element.Attribute("name");
-      if (string.IsNullOrEmpty(nameAttribute?.Value) && !this.variables.ContainsKey(nameAttribute.Value))
+      if (string.IsNullOrEmpty(nameAttribute?.Value))
         return;
 
       var enabledAttribute = element.Attribute("enabled");
@@ -545,7 +545,7 @@ namespace ConfigSettings.Patch
       var valueAttribute = element.Attribute("value");
       if (nameAttribute != null && valueAttribute != null)
       {
-        if (!string.IsNullOrEmpty(nameAttribute.Value) && !this.variables.ContainsKey(nameAttribute.Value))
+        if (!string.IsNullOrEmpty(nameAttribute.Value))
         {
           this.variables[nameAttribute.Value] = new VariableValue(valueAttribute.Value, settingsFilePath);
           this.variables[nameAttribute.Value].Comments = this.GetComments(element);
